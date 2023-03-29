@@ -286,14 +286,13 @@ function SCPALARM.AddSoundButton( tSelf, iPsizeX, iPsizeY, iCat, iSong )
 end
 
 -- Command for open
-concommand.Add("scp_alarm", function(ply, cmd, args, argSstr)
+concommand.Add("scp_alarm", function()
     SCPALARM.OpenMenu()
 end)
 
-hook.Add("OnPlayerChat", "ScpA_open_menu", function(ply, text, teamChat, isDead)
-    if (ply ~= LocalPlayer()) then return end
-    local text = string.lower(text)
-    if not tCMDMenuOpen[text] then return end
+hook.Add("OnPlayerChat", "ScpA_open_menu", function(pPly, sText)
+    if (pPly ~= LocalPlayer()) then return end
+    if not tCMDMenuOpen[string.lower(sText)] then return end
     SCPALARM.OpenMenu()
     return true
 end)
